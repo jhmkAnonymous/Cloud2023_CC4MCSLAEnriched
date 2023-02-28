@@ -1,215 +1,86 @@
 <?xml version="1.0"?>
-<rdf:RDF xmlns="http://www.semanticweb.org/jmechouch/ontologies/2023/0/untitled-ontology-4#"
-     xml:base="http://www.semanticweb.org/jmechouch/ontologies/2023/0/untitled-ontology-4"
-     xmlns:owl="http://www.w3.org/2002/07/owl#"
-     xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
-     xmlns:xml="http://www.w3.org/XML/1998/namespace"
-     xmlns:xsd="http://www.w3.org/2001/XMLSchema#"
-     xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#">
-    <owl:Ontology rdf:about="http://www.semanticweb.org/jmechouch/ontologies/2023/0/untitled-ontology-4"/>
-    
+<rdf:RDF xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+         xmlns:xsd="http://www.w3.org/2001/XMLSchema#"
+         xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#"
+         xmlns:owl="http://www.w3.org/2002/07/owl#"
+         xml:base="http://test.org/onto.owl"
+         xmlns="http://test.org/onto.owl#">
+
+<owl:Ontology rdf:about="http://test.org/onto.owl"/>
+
+<owl:ObjectProperty rdf:about="#isRelatedTo">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#FunctionalProperty"/>
+  <rdfs:range rdf:resource="#stateMachine"/>
+  <rdfs:domain rdf:resource="#eventType"/>
+</owl:ObjectProperty>
+
+<owl:Class rdf:about="#stateMachine">
+  <rdfs:subClassOf rdf:resource="http://www.w3.org/2002/07/owl#Thing"/>
+</owl:Class>
+
+<owl:Class rdf:about="#State">
+  <rdfs:subClassOf rdf:resource="#stateMachine"/>
+</owl:Class>
+
+<owl:Class rdf:about="#Start">
+  <rdfs:subClassOf rdf:resource="#State"/>
+</owl:Class>
+
+<owl:Class rdf:about="#Execute">
+  <rdfs:subClassOf rdf:resource="#State"/>
+</owl:Class>
+
+<owl:Class rdf:about="#Complete">
+  <rdfs:subClassOf rdf:resource="#State"/>
+</owl:Class>
+
+<owl:Class rdf:about="#Transition">
+  <rdfs:subClassOf rdf:resource="#stateMachine"/>
+</owl:Class>
+
+<owl:Class rdf:about="#eventType">
+  <rdfs:subClassOf rdf:resource="http://www.w3.org/2002/07/owl#Thing"/>
+</owl:Class>
+
+<eventType rdf:about="#Service_Create">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+  <isRelatedTo rdf:resource="#Start"/>
+</eventType>
+
+<eventType rdf:about="#Service_Remove">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+  <isRelatedTo rdf:resource="#Start"/>
+</eventType>
+
+<eventType rdf:about="#Service_Update">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+  <isRelatedTo rdf:resource="#Start"/>
+</eventType>
+
+<eventType rdf:about="#Container_Create">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+  <isRelatedTo rdf:resource="#Execute"/>
+</eventType>
+
+<eventType rdf:about="#Container_Destroy">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+  <isRelatedTo rdf:resource="#Execute"/>
+</eventType>
+
+<eventType rdf:about="#Container_Start">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+  <isRelatedTo rdf:resource="#Complete"/>
+</eventType>
+
+<eventType rdf:about="#Container_Stop">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+  <isRelatedTo rdf:resource="#Complete"/>
+</eventType>
+
+<eventType rdf:about="#Ressource_Usage">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+  <isRelatedTo rdf:resource="#Transition"/>
+</eventType>
 
 
-    <!-- 
-    ///////////////////////////////////////////////////////////////////////////////////////
-    //
-    // Object Properties
-    //
-    ///////////////////////////////////////////////////////////////////////////////////////
-     -->
-
-    
-
-
-    <!-- http://www.semanticweb.org/jmechouch/ontologies/2023/0/untitled-ontology-4#isRelatedTo -->
-
-    <owl:ObjectProperty rdf:about="http://www.semanticweb.org/jmechouch/ontologies/2023/0/untitled-ontology-4#isRelatedTo"/>
-    
-
-
-    <!-- http://www.semanticweb.org/jmechouch/ontologies/2023/0/untitled-ontology-4#is_a -->
-
-    <owl:ObjectProperty rdf:about="http://www.semanticweb.org/jmechouch/ontologies/2023/0/untitled-ontology-4#is_a">
-        <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#FunctionalProperty"/>
-        <rdfs:domain rdf:resource="http://www.semanticweb.org/jmechouch/ontologies/2023/0/untitled-ontology-4#EventType"/>
-        <rdfs:range rdf:resource="http://www.semanticweb.org/jmechouch/ontologies/2023/0/untitled-ontology-4#State-Machine"/>
-    </owl:ObjectProperty>
-    
-
-
-    <!-- 
-    ///////////////////////////////////////////////////////////////////////////////////////
-    //
-    // Classes
-    //
-    ///////////////////////////////////////////////////////////////////////////////////////
-     -->
-
-    
-
-
-    <!-- http://www.semanticweb.org/jmechouch/ontologies/2023/0/untitled-ontology-4#Complete -->
-
-    <owl:Class rdf:about="http://www.semanticweb.org/jmechouch/ontologies/2023/0/untitled-ontology-4#Complete">
-        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/jmechouch/ontologies/2023/0/untitled-ontology-4#State"/>
-    </owl:Class>
-    
-
-
-    <!-- http://www.semanticweb.org/jmechouch/ontologies/2023/0/untitled-ontology-4#Container_Create -->
-
-    <owl:Class rdf:about="http://www.semanticweb.org/jmechouch/ontologies/2023/0/untitled-ontology-4#Container_Create">
-        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/jmechouch/ontologies/2023/0/untitled-ontology-4#Execute"/>
-        <owl:disjointWith rdf:resource="http://www.semanticweb.org/jmechouch/ontologies/2023/0/untitled-ontology-4#Container_Destroy"/>
-    </owl:Class>
-    
-
-
-    <!-- http://www.semanticweb.org/jmechouch/ontologies/2023/0/untitled-ontology-4#Container_Destroy -->
-
-    <owl:Class rdf:about="http://www.semanticweb.org/jmechouch/ontologies/2023/0/untitled-ontology-4#Container_Destroy">
-        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/jmechouch/ontologies/2023/0/untitled-ontology-4#Execute"/>
-    </owl:Class>
-    
-
-
-    <!-- http://www.semanticweb.org/jmechouch/ontologies/2023/0/untitled-ontology-4#Container_Start -->
-
-    <owl:Class rdf:about="http://www.semanticweb.org/jmechouch/ontologies/2023/0/untitled-ontology-4#Container_Start">
-        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/jmechouch/ontologies/2023/0/untitled-ontology-4#Complete"/>
-        <owl:disjointWith rdf:resource="http://www.semanticweb.org/jmechouch/ontologies/2023/0/untitled-ontology-4#Container_Stop"/>
-    </owl:Class>
-    
-
-
-    <!-- http://www.semanticweb.org/jmechouch/ontologies/2023/0/untitled-ontology-4#Container_Stop -->
-
-    <owl:Class rdf:about="http://www.semanticweb.org/jmechouch/ontologies/2023/0/untitled-ontology-4#Container_Stop">
-        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/jmechouch/ontologies/2023/0/untitled-ontology-4#Complete"/>
-    </owl:Class>
-    
-
-
-    <!-- http://www.semanticweb.org/jmechouch/ontologies/2023/0/untitled-ontology-4#EventType -->
-
-    <owl:Class rdf:about="http://www.semanticweb.org/jmechouch/ontologies/2023/0/untitled-ontology-4#EventType">
-        <owl:disjointWith rdf:resource="http://www.semanticweb.org/jmechouch/ontologies/2023/0/untitled-ontology-4#State-Machine"/>
-    </owl:Class>
-    
-
-
-    <!-- http://www.semanticweb.org/jmechouch/ontologies/2023/0/untitled-ontology-4#Execute -->
-
-    <owl:Class rdf:about="http://www.semanticweb.org/jmechouch/ontologies/2023/0/untitled-ontology-4#Execute">
-        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/jmechouch/ontologies/2023/0/untitled-ontology-4#State"/>
-    </owl:Class>
-    
-
-
-    <!-- http://www.semanticweb.org/jmechouch/ontologies/2023/0/untitled-ontology-4#Ressource_Usage -->
-
-    <owl:Class rdf:about="http://www.semanticweb.org/jmechouch/ontologies/2023/0/untitled-ontology-4#Ressource_Usage">
-        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/jmechouch/ontologies/2023/0/untitled-ontology-4#Transition"/>
-    </owl:Class>
-    
-
-
-    <!-- http://www.semanticweb.org/jmechouch/ontologies/2023/0/untitled-ontology-4#Service_Create -->
-
-    <owl:Class rdf:about="http://www.semanticweb.org/jmechouch/ontologies/2023/0/untitled-ontology-4#Service_Create">
-        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/jmechouch/ontologies/2023/0/untitled-ontology-4#Start"/>
-    </owl:Class>
-    
-
-
-    <!-- http://www.semanticweb.org/jmechouch/ontologies/2023/0/untitled-ontology-4#Service_Remove -->
-
-    <owl:Class rdf:about="http://www.semanticweb.org/jmechouch/ontologies/2023/0/untitled-ontology-4#Service_Remove">
-        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/jmechouch/ontologies/2023/0/untitled-ontology-4#Start"/>
-    </owl:Class>
-    
-
-
-    <!-- http://www.semanticweb.org/jmechouch/ontologies/2023/0/untitled-ontology-4#Service_Update -->
-
-    <owl:Class rdf:about="http://www.semanticweb.org/jmechouch/ontologies/2023/0/untitled-ontology-4#Service_Update">
-        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/jmechouch/ontologies/2023/0/untitled-ontology-4#Start"/>
-    </owl:Class>
-    
-
-
-    <!-- http://www.semanticweb.org/jmechouch/ontologies/2023/0/untitled-ontology-4#Start -->
-
-    <owl:Class rdf:about="http://www.semanticweb.org/jmechouch/ontologies/2023/0/untitled-ontology-4#Start">
-        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/jmechouch/ontologies/2023/0/untitled-ontology-4#State"/>
-    </owl:Class>
-    
-
-
-    <!-- http://www.semanticweb.org/jmechouch/ontologies/2023/0/untitled-ontology-4#State -->
-
-    <owl:Class rdf:about="http://www.semanticweb.org/jmechouch/ontologies/2023/0/untitled-ontology-4#State">
-        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/jmechouch/ontologies/2023/0/untitled-ontology-4#State-Machine"/>
-        <owl:disjointWith rdf:resource="http://www.semanticweb.org/jmechouch/ontologies/2023/0/untitled-ontology-4#Transition"/>
-    </owl:Class>
-    
-
-
-    <!-- http://www.semanticweb.org/jmechouch/ontologies/2023/0/untitled-ontology-4#State-Machine -->
-
-    <owl:Class rdf:about="http://www.semanticweb.org/jmechouch/ontologies/2023/0/untitled-ontology-4#State-Machine"/>
-    
-
-
-    <!-- http://www.semanticweb.org/jmechouch/ontologies/2023/0/untitled-ontology-4#Transition -->
-
-    <owl:Class rdf:about="http://www.semanticweb.org/jmechouch/ontologies/2023/0/untitled-ontology-4#Transition">
-        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/jmechouch/ontologies/2023/0/untitled-ontology-4#State-Machine"/>
-    </owl:Class>
-    
-
-
-    <!-- http://www.semanticweb.org/jmechouch/ontologies/2023/0/untitled-ontology-4#containerStart -->
-
-    <owl:Class rdf:about="http://www.semanticweb.org/jmechouch/ontologies/2023/0/untitled-ontology-4#containerStart">
-        <owl:equivalentClass>
-            <owl:Restriction>
-                <owl:onProperty rdf:resource="http://www.semanticweb.org/jmechouch/ontologies/2023/0/untitled-ontology-4#isRelatedTo"/>
-                <owl:allValuesFrom rdf:resource="http://www.semanticweb.org/jmechouch/ontologies/2023/0/untitled-ontology-4#Complete"/>
-            </owl:Restriction>
-        </owl:equivalentClass>
-        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/jmechouch/ontologies/2023/0/untitled-ontology-4#EventType"/>
-    </owl:Class>
-    
-
-
-    <!-- 
-    ///////////////////////////////////////////////////////////////////////////////////////
-    //
-    // General axioms
-    //
-    ///////////////////////////////////////////////////////////////////////////////////////
-     -->
-
-    <rdf:Description>
-        <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#AllDisjointClasses"/>
-        <owl:members rdf:parseType="Collection">
-            <rdf:Description rdf:about="http://www.semanticweb.org/jmechouch/ontologies/2023/0/untitled-ontology-4#Complete"/>
-            <rdf:Description rdf:about="http://www.semanticweb.org/jmechouch/ontologies/2023/0/untitled-ontology-4#Execute"/>
-            <rdf:Description rdf:about="http://www.semanticweb.org/jmechouch/ontologies/2023/0/untitled-ontology-4#Start"/>
-        </owl:members>
-    </rdf:Description>
-    <rdf:Description>
-        <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#AllDisjointClasses"/>
-        <owl:members rdf:parseType="Collection">
-            <rdf:Description rdf:about="http://www.semanticweb.org/jmechouch/ontologies/2023/0/untitled-ontology-4#Service_Create"/>
-            <rdf:Description rdf:about="http://www.semanticweb.org/jmechouch/ontologies/2023/0/untitled-ontology-4#Service_Remove"/>
-            <rdf:Description rdf:about="http://www.semanticweb.org/jmechouch/ontologies/2023/0/untitled-ontology-4#Service_Update"/>
-        </owl:members>
-    </rdf:Description>
 </rdf:RDF>
-
-
-
-<!-- Generated by the OWL API (version 4.5.9.2019-02-01T07:24:44Z) https://github.com/owlcs/owlapi -->
-

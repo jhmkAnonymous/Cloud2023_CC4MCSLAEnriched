@@ -148,6 +148,6 @@ for i, case_event_log in events:
 
     json = SM_Discovered.to_json()
 
-    with open("SM_identified/SM_.json", "w") as outfile:
+    with open("SM_discovered/SM_.json", "w") as outfile:
         outfile.write(json)
 
