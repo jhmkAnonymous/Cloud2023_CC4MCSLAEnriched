@@ -29,11 +29,16 @@ SM_Def = to_graph(json.load(open("SM_Defined.json")))
 ### Search Space construction
 SS = nx.DiGraph()
 SS.add_node(0, weight=0)
+
+## Add transition 
+#print(SM_Disc.edges[('S1', 'S2')].keys())
+
 for i, (eltx, elty) in enumerate(zip(SM_Disc.nodes, SM_Def.nodes)):
     temp_last_nodes = get_final_nodes(SS)
     # e = epsilon to guarantee end
     e = i*0.1
-    if SM_Disc.nodes[eltx]['replicas'] == SM_Disc.nodes[eltx]['replicas']:
+    if SM_Disc.nodes[eltx]['replicas'] == SM_Def.nodes[eltx]['replicas']:
+        # State equivalent 
         SS.add_node(str([eltx,elty]), weight=1+e)
         [SS.add_edge(node, str([eltx,elty])) for node in temp_last_nodes]
     else:
@@ -42,28 +47,24 @@ for i, (eltx, elty) in enumerate(zip(SM_Disc.nodes, SM_Def.nodes)):
         [SS.add_edge(node, str([eltx,'>>'])) for node in temp_last_nodes]
         [SS.add_edge(node, str(['>>',elty])) for node in temp_last_nodes]
 
+### Identify starting and ending nodes of the search space
 starting_nodes = get_initial_nodes(SS)
 ending_nodes = get_final_nodes(SS)
 
+# Compute the worst possible alignment
+y_worst_sum = ((len(SM_Def.nodes) * 2 ) * 5)
+
+### Compute the cost of an identified alignment 
 results_path = []
 for s in starting_nodes:
     for e in ending_nodes:
-        cost = 0
+        y_optimal = 0
         path = nx.astar_path(SS, s, e)
-        for elt in path: cost+=SS.nodes[elt]['weight']
-        results_path.append((path, cost))
+        for elt in path: y_optimal+=SS.nodes[elt]['weight']
+        results_path.append((path, y_optimal))
+        fitnessValue = 1 - y_optimal / y_worst_sum
 
-print(results_path)
-
-pos = nx.spring_layout(SM_Disc)
-nx.draw_networkx_edge_labels(SM_Disc, pos)
-
-plt.savefig('SM_Disc.png')
-
-#y_worst_sum = sum(y_worst)
-#y_optimal_sum = sum(y_optimal)
-#fitnessValue = 1 - y_optimal/y_worst
-#print("Report : ")
-#print(f"Y_Optimal : {y_optimal}")
-#print(f"FitnessValue : {fitnessValue}")
-
+print("Report : ")
+print(f"Path : {results_path}")
+print(f"Y_Optimal : {y_optimal}")
+print(f"FitnessValue : {fitnessValue}")
