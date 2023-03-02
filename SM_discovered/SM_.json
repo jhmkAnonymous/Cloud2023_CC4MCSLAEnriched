@@ -1,9 +1,37 @@
 {
     "_StateMachine__graph": {
-        "_adj": {},
-        "_node": {},
-        "_pred": {},
-        "_succ": {},
+        "_adj": {
+            "S1": {
+                "S2": {}
+            },
+            "S2": {
+                "S3": {}
+            },
+            "S3": {}
+        },
+        "_node": {
+            "S1": {},
+            "S2": {},
+            "S3": {}
+        },
+        "_pred": {
+            "S1": {},
+            "S2": {
+                "S1": {}
+            },
+            "S3": {
+                "S2": {}
+            }
+        },
+        "_succ": {
+            "S1": {
+                "S2": {}
+            },
+            "S2": {
+                "S3": {}
+            },
+            "S3": {}
+        },
         "graph": {}
     },
     "_StateMachine__name": "",
@@ -27,6 +55,13 @@
                 "replicas": "6"
             },
             "_state__name": "S3",
+            "_state__type": "isNormal"
+        },
+        {
+            "_state__Resourcerequirements": {
+                "replicas": "1"
+            },
+            "_state__name": "S4",
             "_state__type": "isFinal"
         }
     ],
@@ -82,6 +117,32 @@
             "_transition__name": "T2",
             "_transition__source": "S2",
             "_transition__target": "S3"
+        },
+        {
+            "_transition__actions": [
+                {
+                    "_action__attributes": {
+                        "replicas": 5
+                    },
+                    "_action__id": "A1",
+                    "_action__type": "Scale-in"
+                }
+            ],
+            "_transition__events": [
+                {
+                    "_event__id": "E1",
+                    "_event__predicate": {
+                        "metric": "Cpu Usage",
+                        "operator": ">=",
+                        "refValue": 15.0,
+                        "time": "60.0s"
+                    },
+                    "_event__type": "ResourceRelatedEvent"
+                }
+            ],
+            "_transition__name": "T3",
+            "_transition__source": "S3",
+            "_transition__target": "S4"
         }
     ]
 }

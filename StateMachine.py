@@ -175,11 +175,11 @@ class StateMachine(object):
 
     def add_state(self, new_state):
         self.states.append(new_state)
-        self.graph.add_node(new_state.name)
+        self.__graph.add_node(new_state.name)
 
     def add_transition(self, new_transition):
         self.transitions.append(new_transition)
-        self.graph.add_edge(new_transition.source, new_transition.target)
+        self.__graph.add_edge(new_transition.source, new_transition.target)
 
     def __init__(self, name=None, states=None, transitions=None):
         self.__name = "" if name is None else name
@@ -198,6 +198,9 @@ class StateMachine(object):
 
     def __get_transitions(self):
         return self.__transitions
+    
+    def __get_graph(self):
+        return self.__graph
 
     def __hash__(self):
         ret = 0
@@ -217,16 +220,20 @@ class StateMachine(object):
         from pm4py.objects.petri_net.utils.petri_utils import add_transition_from_to
         this_copy = StateMachine(self.name)
         memodict[id(self)] = this_copy
+
         for state in self.states:
             state_copy = StateMachine.state(state.name, properties=state.properties)
             this_copy.states.add(state_copy)
             memodict[id(state)] = state_copy
+
         for trans in self.transitions:
             trans_copy = StateMachine.Transition(trans.name, trans.label, properties=trans.properties)
             this_copy.transitions.add(trans_copy)
             memodict[id(trans)] = trans_copy
+
         for transition in self.transitions:
             add_transition_from_to(memodict[id(transition.source)], memodict[id(transition.target)], this_copy, weight=transition.weight)
+
         return this_copy
 
     def __repr__(self):
@@ -254,4 +261,4 @@ class StateMachine(object):
     name = property(__get_name, __set_name)
     states = property(__get_states)
     transitions = property(__get_transitions)
-    graph = nx.DiGraph()
+    graph = property(__get_graph)
