@@ -3,6 +3,8 @@
 """
 #### Ontology ####
 from owlready2 import * 
+
+##### Create new ontology #####
 onto = get_ontology('http://test.org/onto.owl')
 
 ##### Ontology Definition #####
